@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.Write("ป้อนข้อมูล a: ");
+        string input = Console.ReadLine();
+        string[] a = input.Split(',');
+
+        Console.Write("ป้อนตัวอักษร x: ");
+        char x = Console.ReadKey().KeyChar;
+        Console.WriteLine();
+
+        List<int> indexes = new List<int>();
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i].Contains(x))
+            {
+                indexes.Add(i);
+            }
+        }
+
+        // แสดงผลลัพธ์
+        if (indexes.Count > 0)
+        {
+            Console.WriteLine("ตัวอักษร {0} พบในข้อมูล a ที่ตำแหน่ง:", x);
+            foreach (int index in indexes)
+            {
+                Console.Write(" {0}: {1}", index, a[index]);
+                int charIndex = a[index].IndexOf(x);
+                Console.WriteLine(" (ตำแหน่ง: {0})", charIndex);
+            }
+            Console.WriteLine();
+        }
+        else
+        {
+            Console.WriteLine("ไม่พบตัวอักษร {0} ในข้อมูล a", x);
+        }
+    }
+}
