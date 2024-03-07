@@ -1,0 +1,29 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("กรอกตัวเลขสูงสุด: ");
+        string input = Console.ReadLine();
+        int n = int.Parse(input);
+
+        for (int i = 1; i <= n; i++)
+        {
+            bool isPing = (i % 3 == 0);
+            bool isPong = (i % 5 == 0);
+            if (isPing && isPong)
+            {
+                Console.WriteLine($"{i} Ping Pong");
+            }
+            else if (isPing)
+            {
+                Console.WriteLine($"{i} Ping");
+            }
+            else if (isPong)
+            {
+                Console.WriteLine($"{i} Pong");
+            }
+        }
+    }
+}
