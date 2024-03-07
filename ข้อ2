@@ -1,0 +1,32 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("ป้อนจำนวน n: ");
+        int n = int.Parse(Console.ReadLine());
+        int i = int.Parse(Console.ReadLine());
+        int j = int.Parse(Console.ReadLine());
+
+        // วนลูป 
+        for (int num = 1; num <= n; num++)
+        {
+            bool isPing = num % i == 0;
+            bool isPong = num % j == 0;
+
+            if (isPing && isPong)
+            {
+                Console.WriteLine($"{num} Ping Pong");
+            }
+            else if (isPing)
+            {
+                Console.WriteLine($"{num} Ping");
+            }
+            else if (isPong)
+            {
+                Console.WriteLine($"{num} Pong");
+            }
+        }
+    }
+}
