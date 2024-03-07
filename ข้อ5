@@ -1,0 +1,119 @@
+using System;
+using System.Collections.Generic;
+
+public class WebsiteHistory
+{
+    private readonly Stack<string> _history;
+    private string _currentUrl;
+
+    public WebsiteHistory()
+    {
+        _history = new Stack<string>();
+    }
+
+    public void InputUrl(string url)
+    {
+        if (!string.IsNullOrWhiteSpace(url))
+        {
+            // เพิ่ม URL ลงใน Stack _history
+            _history.Push(url);
+            Console.WriteLine("ตอนนี้คุณอยู่ที่ " + url);
+        }
+        else
+        {
+            Console.WriteLine("URL ไม่ถูกต้อง");
+        }
+    }
+
+
+    public void Previous()
+    {
+        if (_history.Count > 1 && _currentUrl != _history.Peek())
+        {
+            _history.Pop();
+            _currentUrl = _history.Peek();
+            Console.WriteLine("ตอนนี้คุณอยู่ที่ " + _currentUrl);
+        }
+        else
+        {
+            Console.WriteLine("ไม่มีเว็บไซต์ก่อนหน้า");
+        }
+    }
+
+    public void Next()
+    {
+        if (_history.Count > 1)
+        {
+            _history.Pop();
+            _currentUrl = _history.Peek();
+            Console.WriteLine("ตอนนี้คุณอยู่ที่ " + _currentUrl);
+        }
+        else
+        {
+            Console.WriteLine("ไม่มีเว็บไซต์ถัดไป");
+        }
+    }
+
+    public void Current()
+    {
+        if (_history.Count > 0)
+        {
+            _currentUrl = _history.Peek();
+            Console.WriteLine("ตอนนี้คุณอยู่ที่ " + _currentUrl);
+        }
+        else
+        {
+            Console.WriteLine("ไม่มีเว็บไซต์เปิดอยู่");
+        }
+    }
+
+    public void All()
+    {
+        if (_history.Count > 0)
+        {
+            Console.WriteLine("ประวัติ:");
+            foreach (var url in _history)
+            {
+                Console.WriteLine(url);
+            }
+        }
+        else
+        {
+            Console.WriteLine("ไม่มีประวัติ");
+        }
+    }
+
+    public static void Main(string[] args)
+    {
+        var websiteHistory = new WebsiteHistory();
+
+        while (true)
+        {
+            Console.WriteLine("ป้อนคำสั่ง: ");
+            var command = Console.ReadLine();
+
+            switch (command)
+            {
+                case "input":
+                    Console.WriteLine("ป้อน URL: ");
+                    var url = Console.ReadLine();
+                    websiteHistory.InputUrl(url);
+                    break;
+                case "prev":
+                    websiteHistory.Previous();
+                    break;
+                case "next":
+                    websiteHistory.Next();
+                    break;
+                case "current":
+                    websiteHistory.Current();
+                    break;
+                case "all":
+                    websiteHistory.All();
+                    break;
+                case "exit":
+                    return;
+            }
+        }
+    }
+}
